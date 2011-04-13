@@ -6,3 +6,6 @@ get '/' do
   slim :index
 end
 
+get '/rate' do
+  "registered"
+end

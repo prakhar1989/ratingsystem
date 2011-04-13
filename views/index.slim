@@ -1,7 +1,11 @@
 
 h2 please rate
 
+div id="rating"
+
 javascript:
     $(document).ready(function(){
-        console.log("working");
+        for(var i=1; i<6; i++){
+            $('<p><a href="/rate">'+i+'</a></p>').appendTo('#rating');
+        }
     });
