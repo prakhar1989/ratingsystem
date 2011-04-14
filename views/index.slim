@@ -3,6 +3,7 @@ h2 please rate
 
 p Please rate
 div id="rating"
+div id="displayRating"
 img id="spinner" src="spinner.gif" style="margin: 20px 0; position:absolute;"
 img id="graph" style="margin: 20px 0;"
 
@@ -14,8 +15,8 @@ javascript:
         for(var i=1; i<6; i++){
             $('<p><a href="#">'+i+'</a></p>').appendTo('#rating');
         }
-        
         $('a').click(function(e){
+            $('#rating').hide();
             $('#spinner').show();
             e.preventDefault();
             var $rating = $(this).html();
@@ -23,6 +24,12 @@ javascript:
                    function(data){
                         var finalURL = baseURL + data;
                         $('#graph').attr('src',finalURL);
+                        console.log(typeof data);
+                        
+                        //for(var i=1;i<6;i++){
+                        //    $('<p>'+i+'</p>').appendTo('#rating');   
+                        //}
+                        
                         $('#graph').load(function(){
                             console.log("done");
                             $('#spinner').hide();
