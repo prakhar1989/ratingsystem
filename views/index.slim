@@ -1,11 +1,35 @@
 
 h2 please rate
 
+p Please rate
 div id="rating"
+img id="spinner" src="spinner.gif" style="margin: 20px 0; position:absolute;"
+img id="graph" style="margin: 20px 0;"
 
 javascript:
     $(document).ready(function(){
+        
+        var baseURL = "https://chart.googleapis.com/chart?cht=p3&chl=1|2|3|4|5&chs=500x200&chd=t:"
+        $('#spinner').hide();
         for(var i=1; i<6; i++){
-            $('<p><a href="/rate">'+i+'</a></p>').appendTo('#rating');
+            $('<p><a href="#">'+i+'</a></p>').appendTo('#rating');
         }
+        
+        $('a').click(function(e){
+            $('#spinner').show();
+            e.preventDefault();
+            var $rating = $(this).html();
+            $.post("/rate",{rating: $rating},
+                   function(data){
+                        var finalURL = baseURL + data;
+                        $('#graph').attr('src',finalURL);
+                        $('#graph').load(function(){
+                            console.log("done");
+                            $('#spinner').hide();
+                        });
+                        
+                   });
+        });
     });
+    
+    
